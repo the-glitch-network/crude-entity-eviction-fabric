@@ -1,9 +1,10 @@
 {
   "required": true,
-  "package": "com.example.mod.mixin",
+  "package": "net.kjp12.cee.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "MixinCommandManager"
+    "AccessorMinecraftServer",
+    "MixinServerEntityManager"
   ],
   "injectors": {
     "defaultRequire": 1

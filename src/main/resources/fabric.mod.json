@@ -1,21 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "example-mod",
+  "id": "crude-entity-eviction",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "An example mod.",
+  "name": "Crude Entity Eviction",
+  "description": "Entity removal by hotspots.",
   "authors": [
     "KJP12"
   ],
   "icon": "pack.png",
+  "contact": {
+    "sources": "https://github.com/the-glitch-network/crude-entity-eviction-fabric",
+    "discord": "https://discord.gg/EmPS9y9"
+  },
+  "license": [
+    "MPL-2.0"
+  ],
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.example.mod.Example::init"
+      "net.kjp12.cee.Main::init"
     ]
   },
   "mixins": [
-    "example-mod.mixin.json"
+    "crude-entity-eviction.mixin.json"
   ],
   "depends": {
     "minecraft": ">=${minecraft_required}",

@@ -1,3 +1,9 @@
+/* Copyright (c) 2021 KJP12
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
 import java.net.URI
 
 plugins {
@@ -14,6 +20,9 @@ val yarn_mappings: String by project
 val loader_version: String by project
 val fabric_api_version: String by project
 val lazydfu_version: String by project
+val ledger_version: String by project
+val fl_kotlin_version: String by project
+val h2_version: String by project
 val project_version: String by project
 
 val isPublish = System.getenv("GITHUB_EVENT_NAME") == "release"
@@ -51,7 +60,12 @@ repositories {
 dependencies {
   minecraft("com.mojang", "minecraft", minecraft_version)
   mappings("net.fabricmc", "yarn", yarn_mappings, classifier = "v2")
+  include(implementation("com.h2database", "h2", h2_version))
   modImplementation("net.fabricmc", "fabric-loader", loader_version)
+  modImplementation("maven.modrinth", "ledger", ledger_version)
+  modImplementation(fabricApi.module("fabric-lifecycle-events-v1", fabric_api_version))
+  modRuntime("net.fabricmc", "fabric-language-kotlin", fl_kotlin_version)
+  modRuntime("net.fabricmc.fabric-api", "fabric-api", fabric_api_version)
   modRuntime("maven.modrinth", "lazydfu", lazydfu_version)
 }
 
@@ -60,18 +74,16 @@ spotless {
   java {
     importOrderFile(rootDir.resolve(".internal/spotless.importorder"))
 
-    // If the spotless config doesn't exist, this will fall back to the eclipse default.
     val eclipse = eclipse()
     val eclipseConfig = rootDir.resolve(".internal/spotless.xml")
     if (eclipseConfig.exists()) eclipse.configFile(eclipseConfig)
 
-    // If the license header doesn't exist, it'll simply not be applied.
-    if (licenseHeader.exists()) licenseHeaderFile(licenseHeader)
+    licenseHeaderFile(licenseHeader)
   }
   kotlinGradle {
     target("*.gradle.kts")
     ktfmt().googleStyle()
-    if (licenseHeader.exists()) licenseHeaderFile(licenseHeader, "(import|plugins|rootProject)")
+    licenseHeaderFile(licenseHeader, "(import|plugins|rootProject)")
   }
 }
 
