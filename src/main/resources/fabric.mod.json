@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "example-mod",
+  "version": "${version}",
+  "name": "Example Mod",
+  "description": "An example mod.",
+  "authors": [
+    "KJP12"
+  ],
+  "icon": "pack.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.example.mod.Example::init"
+    ]
+  },
+  "mixins": [
+    "example-mod.mixin.json"
+  ],
+  "depends": {
+    "minecraft": ">=${minecraft_required}",
+    "fabricloader": ">=0.11.3",
+    "java": ">=16"
+  }
+}

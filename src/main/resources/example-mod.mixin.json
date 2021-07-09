@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.example.mod.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "MixinCommandManager"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
